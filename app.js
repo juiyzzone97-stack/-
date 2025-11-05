@@ -6,6 +6,7 @@ const home = require("./routers/home");
 //앱 세팅
 app.set('views', './views');
 app.set("view engine", "ejs");
+app.use(express.static(`${__dirname}/public`))
 
 app.use("/", home);
 
