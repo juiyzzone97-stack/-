@@ -9,5 +9,11 @@ const loginBtn = document.querySelector("button")
           id : id.value,
           password : password.value,
         };
-        console.log(req);
+        fetch("/login", {
+          method : "POST",
+          headers : {
+              "Content-Type" : "application/json",
+          },
+          body : JSON.stringify(req)
+        });
       };
