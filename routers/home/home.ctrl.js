@@ -1,7 +1,5 @@
-const users = {
-  id : ["오하얀", "김현아"],
-  password : ["1234", "5678"]
-}
+
+const User = require("../../models/User");
 
 const output = {
     hello : (req, res) => {
@@ -11,25 +9,13 @@ const output = {
     login : (req, res) => {
     res.render("home/login");
     },
-}
+};
 
 const process = {
   login : (req, res) => {
-    const id = req.body.id
-    const password = req.body.password;
-
-    if (users.id.includes(id)) {
-      const idx = users.id.indexOf(id);
-      if(users.password[idx] === password) {
-        return res.json({
-          success : true,
-        })
-      }
-    }
-        return res.json({
-          success : false,
-          message : "로그인이 실패하셨습니다",
-    })
+    const user = new User(req.body);
+    const response = user.login();
+    return res.json(response);
   }
 }
 
@@ -37,3 +23,4 @@ module.exports = {
   output,
   process,
 }
+
